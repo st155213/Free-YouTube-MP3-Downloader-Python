@@ -7,35 +7,6 @@ import shutil
 import tkinter as tk
 from tkinter import messagebox
 # last change 02.09.2025
-# --- Create BAT starter file / (no other Python compiler like VS Code or Spyder needed) ---
-def _ensure_bat_gui():
-    try:
-        script_path = os.path.abspath(__file__)
-    except NameError:
-        script_path = os.path.abspath(sys.argv[0])
-
-    script_dir  = os.path.dirname(script_path)
-    bat_path    = os.path.join(script_dir, "start_downloader_gui.bat")
-    py_name     = os.path.basename(script_path)
-    py_exe      = sys.executable
-    # Test if pythonw.exe exist
-    pyw_exe = py_exe[:-4] + "w.exe" if py_exe.lower().endswith("python.exe") else py_exe
-
-    if not os.path.isfile(bat_path):
-        with open(bat_path, "w", encoding="utf-8") as f:
-            f.write(
-                "@echo off\n"
-                "setlocal\n"
-                'cd /d "%~dp0"\n'
-                f'if exist "{pyw_exe}" (\n'
-                f'  start "" "{pyw_exe}" "{py_name}"\n'
-                ") else (\n"
-                f'  start "" "{py_exe}" "{py_name}"\n'
-                ")\n"
-            )
-
-_ensure_bat_gui()
-
 #---music dir where mp3 file are saved---
 path_music_dir= os.getcwd() + "\\music"
 os.makedirs(path_music_dir,exist_ok=True)
