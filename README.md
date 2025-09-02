@@ -1,2 +1,14 @@
 # Python_Youtube_mp3_downloader_Win
 A simple Python GUI tool to download YouTube videos as MP3 files on Windows. This repository contains the Python source code only.
+
+GUI built with Tkinter
+
+Automatically downloads ffmpeg if missing
+
+Uses yt-dlp for YouTube extraction
+
+Browser cookies (Firefox, Edge, Chrome, Opera, Brave) are used if login is required
+
+Used Python version 3.12.4 
+
+Does not include a pre-built EXE; users can create it themselves using PyInstaller
