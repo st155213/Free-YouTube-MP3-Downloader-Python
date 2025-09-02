@@ -30,7 +30,7 @@ __If not__:
   
   python get-pip.py
   
-  Test: Excecute pip --version
+  Test again Excecute: pip --version
 # Step 3: Download and Execute Python_Youtube_MP3_Downloader_Win.pyw 
 __Run the Python_Youtube_MP3_Downloader_Win.pyw__ file.
 Enter your YouTube link in the GUI and click "Download MP3".
