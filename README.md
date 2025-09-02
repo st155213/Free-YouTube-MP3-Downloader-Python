@@ -16,7 +16,7 @@ Downloading copyrighted content without permission may violate YouTube’s Terms
 Please only download videos that you own or that are licensed for free use.
 
 ## Step 1: Install Python
-Install Python from [python.org](https://www.python.org/)
+Install Python from [python.org](https://www.python.org/) and make sure to check __Add Python to PATH__
 
 ## Step 2: Test if Pip is installed
 Execute: pip --version
