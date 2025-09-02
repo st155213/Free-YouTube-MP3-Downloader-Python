@@ -13,6 +13,7 @@ Install Python from https://www.python.org/
 # Step 2: Test if Pip is installed Package Manager)
 Excecute pip --version
 If you see a version number it is already installed and go to the next step.
+
 Usually it is already installed with Python V 3.4 or higher.
 If not:
   Get the code (https://bootstrap.pypa.io/get-pip.py) and save it as get-pip.py.
