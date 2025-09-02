@@ -7,7 +7,7 @@ This repository contains the Python source code only.
 - Automatically downloads ffmpeg if missing  
 - Uses yt-dlp for YouTube extraction  
 - Browser cookies (Firefox, Edge, Chrome, Opera, Brave) are used if login is required  
-- Python version 3.12.4 was used  
+- Python version 3.13.7 was used  
 - Does not include a pre-built EXE; users can create it themselves using PyInstaller  
 
 ## Usage Note
