@@ -27,7 +27,7 @@ __If not__:
   Get the code (https://bootstrap.pypa.io/get-pip.py) and save it as get-pip.py.
   Open a cmd in the same dir as get-pip.py and execute python get-pip.py.
   Test: Excecute pip --version
-# Step 3: Execute Python_Youtube_MP3_Downloader_Win.py 
+# Step 3: Download and Execute Python_Youtube_MP3_Downloader_Win.pyw 
 __Run the Python_Youtube_MP3_Downloader_Win.py__ file.
 
 A start_downloader_gui.bat file will be automatically created in the same directory.
