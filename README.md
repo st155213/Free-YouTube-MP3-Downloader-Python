@@ -23,7 +23,7 @@ Execute: pip --version
 If you see a version number it is already installed and go to the next step.
 
 Usually it is already installed with Python V 3.4 or higher.
-If not:
+__If not__:
   Get the code (https://bootstrap.pypa.io/get-pip.py) and save it as get-pip.py.
   Open a cmd in the same dir as get-pip.py and execute python get-pip.py.
   Test: Excecute pip --version
