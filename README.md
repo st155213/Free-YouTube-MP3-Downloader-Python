@@ -1,4 +1,4 @@
-# Python_Youtube_MP3_Downloader_Win
+# Free-YouTube-MP3-Downloader-Python
 
 A simple Python GUI tool to download YouTube videos as MP3 files on Windows.  
 This repository contains the Python source code only.
