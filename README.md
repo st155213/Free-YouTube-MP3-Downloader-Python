@@ -28,11 +28,8 @@ __If not__:
   Open a cmd in the same dir as get-pip.py and execute python get-pip.py.
   Test: Excecute pip --version
 # Step 3: Download and Execute Python_Youtube_MP3_Downloader_Win.pyw 
-__Run the Python_Youtube_MP3_Downloader_Win.py__ file.
-
-A start_downloader_gui.bat file will be automatically created in the same directory.
-__Double-click the start_downloader_gui.bat__ file to open the GUI.
-Enter your YouTube link and click "Download MP3".
+__Run the Python_Youtube_MP3_Downloader_Win.pyw__ file.
+Enter your YouTube link in the GUI and click "Download MP3".
 # Step 4: Find your music in the music dir
 Your MP3 files will be saved in the "music" directory created in the same folder as the script.
 
