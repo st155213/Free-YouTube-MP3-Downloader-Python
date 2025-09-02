@@ -8,9 +8,9 @@ Python version 3.12.4 was used.
 Does not include a pre-built EXE; users can create it themselves using PyInstaller.
 Usage Note:
 This tool is intended for private, legal use only. Downloading copyrighted content without permission may violate YouTube’s Terms of Service.
-# Step 1 Install Python
+# Step 1: Install Python
 Install Python from https://www.python.org/
-# Step 2 Test if Pip is installed Package Manager)
+# Step 2: Test if Pip is installed Package Manager)
 Excecute pip --version
 If you see a version number it is already installed and go to the next step.
 Usually it is already installed with Python V 3.4 or higher.
@@ -18,10 +18,11 @@ If not:
   Get the code (https://bootstrap.pypa.io/get-pip.py) and save it as get-pip.py.
   Open a cmd in the same dir as get-pip.py and execute python get-pip.py.
   Test: Excecute pip --version
-# Step 3 Execute Python_Youtube_MP3_Downloader_Win.py 
+# Step 3: Execute Python_Youtube_MP3_Downloader_Win.py 
  Simply run the Python_Youtube_MP3_Downloader_Win.py file.
 A start_downloader_gui.bat file will be automatically created in the same directory.
 Double-click the start_downloader_gui.bat file to open the GUI.
 Enter your YouTube link and click "Download MP3".
-# Step 4 Find your music in the music dir
+# Step 4: Find your music in the music dir
+Your MP3 files will be saved in the "music" directory created in the same folder as the script.
 
