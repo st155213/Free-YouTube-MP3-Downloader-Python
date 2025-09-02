@@ -12,3 +12,7 @@ Browser cookies (Firefox, Edge, Chrome, Opera, Brave) are used if login is requi
 Used Python version 3.12.4 
 
 Does not include a pre-built EXE; users can create it themselves using PyInstaller
+
+Usage Note:
+
+This tool is intended for private, legal use only. Downloading copyrighted content without permission may violate YouTube’s Terms of Service.
