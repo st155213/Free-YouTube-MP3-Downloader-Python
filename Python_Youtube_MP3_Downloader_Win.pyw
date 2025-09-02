@@ -7,7 +7,7 @@ import shutil
 import tkinter as tk
 from tkinter import messagebox
 # last change 02.09.2025
-#---music dir where mp3 file are saved---
+#--- music dir where mp3 file are saved ---
 path_music_dir= os.getcwd() + "\\music"
 os.makedirs(path_music_dir,exist_ok=True)
 
