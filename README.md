@@ -22,7 +22,7 @@ Install Python from [python.org](https://www.python.org/) and make sure to check
 Press: __Win + R__
 
 Type: __cmd__
-and execute it.
+and execute it by click on __OK__.
  
 Execute: pip --version
 
