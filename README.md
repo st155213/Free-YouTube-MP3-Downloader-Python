@@ -20,6 +20,7 @@ Install Python from [python.org](https://www.python.org/) and make sure to check
 
 ## Step 2: Test if Pip is installed
 Hold: Win + R
+
 Type:cmd
 and Execute it. 
 Execute: pip --version
