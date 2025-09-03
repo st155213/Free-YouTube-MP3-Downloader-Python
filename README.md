@@ -37,7 +37,7 @@ __If not__:
   
   Test again Excecute: pip --version
 # Step 3: Download and Execute Python_Youtube_MP3_Downloader_Win.pyw 
-__Run the Python_Youtube_MP3_Downloader_Win.pyw__ file.
+__Run the Python_Youtube_MP3_Downloader_Win.pyw__ file and wait.  It automatically downloads ffmpeg and yt-dlp. 
 Enter your YouTube link in the GUI and click "Download MP3".
 # Step 4: Find your music in the music dir
 Your MP3 files will be saved in the "music" directory created in the same folder as the script.
