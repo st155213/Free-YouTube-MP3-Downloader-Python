@@ -29,13 +29,14 @@ Execute: pip --version
 If you see a version number it is already installed and go to the next step.
 
 Usually it is already installed with Python V 3.4 or higher.
+
 __If not__:
   Get the code (https://bootstrap.pypa.io/get-pip.py) and save it as get-pip.py.
   Open a cmd in the same dir as get-pip.py and execute: 
   
   python get-pip.py
   
-  Test again Excecute: pip --version
+  Test again by excecute: pip --version
 # Step 3: Download and Execute Python_Youtube_MP3_Downloader_Win.pyw 
 __Run the Python_Youtube_MP3_Downloader_Win.pyw__ file and wait.  It automatically downloads ffmpeg and yt-dlp. 
 Enter your YouTube link in the GUI and click "Download MP3".
