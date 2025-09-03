@@ -19,6 +19,9 @@ Please only download videos that you own or that are licensed for free use.
 Install Python from [python.org](https://www.python.org/) and make sure to check __Add Python to PATH__
 
 ## Step 2: Test if Pip is installed
+Hold: Win + R
+Type:cmd
+and Execute it. 
 Execute: pip --version
 
 If you see a version number it is already installed and go to the next step.
