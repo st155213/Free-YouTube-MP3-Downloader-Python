@@ -8,7 +8,7 @@ Designed for private, legal use only.
 ## Features
 - GUI built with **Tkinter**
 - Automatically downloads **ffmpeg** if missing
-- Uses **yt-dlp** for audio extraction
+- Automatically downloads **yt-dlp** if missing 
 - Uses browser cookies (Firefox, Edge, Chrome, Opera, Brave) if login is required
 - Saves MP3 files into a local `music` directory
 - Tested with **Python 3.13.7**
