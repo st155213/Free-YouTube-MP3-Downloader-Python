@@ -48,10 +48,16 @@ __If not__:
   
   Test again by excecute: pip --version
 ### Step 3: Step 3: Run the Downloader
-- 1. Download the __Python_Youtube_MP3_Downloader_Win.pyw__ file.
-- 2. Run the file and wait; it will automatically download ffmpeg and yt-dlp if missing.
-- 3. Enter a YouTube URL in the GUI and click Download MP3.
-- 4. Files will be saved in the local music directory in the same folder as the Python file. The music folder is automatically created by the program if it doesn’t exist.
+1. Download the __Python_Youtube_MP3_Downloader_Win.pyw__ file.
+2. Run the file and wait; it will automatically download ffmpeg and yt-dlp if missing.
+3. Enter a YouTube URL in the GUI and click Download MP3.
+4. Files will be saved in the local music directory in the same folder as the Python file. The music folder is automatically created by the program if it doesn’t exist.
+
+## License
+
+This project is licensed under the MIT License.  
+See the [LICENSE](LICENSE) file for details.
+
 
 
 
