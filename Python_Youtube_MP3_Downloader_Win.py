@@ -6,7 +6,10 @@ import zipfile
 import shutil
 import tkinter as tk
 from tkinter import messagebox
-# last change 02.09.2025
+import os
+import winreg
+import subprocess
+# last change 03.09.2025
 #--- music dir where mp3 file are saved ---
 path_music_dir= os.getcwd() + "\\music"
 os.makedirs(path_music_dir,exist_ok=True)
@@ -23,7 +26,7 @@ except ImportError:
 ffmpeg_path = os.path.join(os.environ['USERPROFILE'], "ffmpeg")
 os.makedirs(ffmpeg_path, exist_ok=True)
 bin_path = os.path.join(ffmpeg_path, "bin")
-# --- Download ffmpeg if not present ---
+
 ffmpeg_exe = os.path.join(bin_path, "ffmpeg.exe")
 ffprobe_exe = os.path.join(bin_path, "ffprobe.exe")
 ffplay_exe = os.path.join(bin_path, "ffplay.exe")
@@ -64,7 +67,13 @@ if not (os.path.isfile(ffmpeg_exe) and os.path.isfile(ffprobe_exe)and os.path.is
     os.remove(zip_file)
     shutil.rmtree(extracted_folder)
     print("ffmpeg setup complete.")
-
+#--- Set ffmpeg as system variable   ---
+ffmpeg_bin = r"C:\Users\dimi1\ffmpeg\bin"
+# Adds ffmpeg to PATH 
+current_path = os.environ.get("PATH", "")
+if ffmpeg_bin not in current_path:
+    subprocess.run(f'setx PATH "{current_path};{ffmpeg_bin}"', shell=True)
+    print("ffmpeg added to user PATH. Please restart CMD to use it.")
 
 #--- Function to download MP3 ---
 def download_mp3():
