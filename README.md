@@ -22,7 +22,8 @@ Install Python from [python.org](https://www.python.org/) and make sure to check
 Hold: Win + R
 
 Type:cmd
-and Execute it. 
+and Execute it.
+ 
 Execute: pip --version
 
 If you see a version number it is already installed and go to the next step.
