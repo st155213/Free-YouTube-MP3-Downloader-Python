@@ -26,8 +26,9 @@ bin_path = os.path.join(ffmpeg_path, "bin")
 # --- Download ffmpeg if not present ---
 ffmpeg_exe = os.path.join(bin_path, "ffmpeg.exe")
 ffprobe_exe = os.path.join(bin_path, "ffprobe.exe")
+ffplay_exe = os.path.join(bin_path, "ffplay.exe")
 
-if not (os.path.isfile(ffmpeg_exe) and os.path.isfile(ffprobe_exe)):
+if not (os.path.isfile(ffmpeg_exe) and os.path.isfile(ffprobe_exe)and os.path.isfile(ffplay_exe)):
     print("ffmpeg not found. Downloading...")
     zip_url = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip"
     zip_file = os.path.join(ffmpeg_path, "ffmpeg.zip")
@@ -71,27 +72,41 @@ def download_mp3():
     if not url:
         messagebox.showwarning("Input error", "Please enter a YouTube URL")
         return
-    #--- browser for cookie import ---
-    #--- yt-dlp needs sometime a confirmation that you are not a bot. Therefor cookies where used from a browser ---
-    browsers = ["firefox", "edge","chrome","opera","brave"]  
+
     success = False
 
-    for browser in browsers:
-        command = [
+    # --- 1. Try without cookies ---
+    try:
+        subprocess.run([
             "yt-dlp",
             "-x",
             "--audio-format", "mp3",
             "--ffmpeg-location", bin_path,
-            "--cookies-from-browser", browser,
             "-o", os.path.join(path_music_dir, "%(title)s.%(ext)s"),
             url
-        ]
-        try:
-            subprocess.run(command, creationflags=subprocess.CREATE_NO_WINDOW, check=True)
-            success = True
-            break  # Download successful, break
-        except subprocess.CalledProcessError:
-            continue  # try next browser
+        ], creationflags=subprocess.CREATE_NO_WINDOW, check=True)
+        success = True
+    except subprocess.CalledProcessError:
+        pass  # If fail try with cookies
+    # --- 2. Try with browser cookies ---
+    if not success:
+        browsers = ["firefox", "edge", "chrome", "opera", "brave"]
+        for browser in browsers:
+            try:
+                subprocess.run([
+                    "yt-dlp",
+                    "-x",
+                    "--audio-format", "mp3",
+                    "--ffmpeg-location", bin_path,
+                    "--cookies-from-browser", browser,
+                    "-o", os.path.join(path_music_dir, "%(title)s.%(ext)s"),
+                    url
+                ], creationflags=subprocess.CREATE_NO_WINDOW, check=True)
+                success = True
+                break
+            except subprocess.CalledProcessError:
+                continue
+
     if success:
         messagebox.showinfo("Success", f"Download complete!\nSaved in {path_music_dir}")
     else:
