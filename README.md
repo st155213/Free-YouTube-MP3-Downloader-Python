@@ -47,7 +47,7 @@ __If not__:
   python get-pip.py
   
   Test again by excecute: pip --version
-### Step 3: Step 3: Run the Downloader
+### Step 3: Run the Downloader
 1. Download the __Python_Youtube_MP3_Downloader_Win.pyw__ file.
 2. Run the file and wait; it will automatically download ffmpeg and yt-dlp if missing.
 3. Enter a YouTube URL in the GUI and click Download MP3.
