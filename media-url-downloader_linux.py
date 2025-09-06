@@ -1,9 +1,6 @@
 import os
 import subprocess
 import sys
-import urllib.request
-import zipfile
-import shutil
 import tkinter as tk
 from tkinter import messagebox
 
@@ -19,44 +16,24 @@ except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "yt-dlp"])
     import yt_dlp
 
-# --- Download ffmpeg if not present ---
-ffmpeg_path = os.path.join(os.environ['USERPROFILE'], "ffmpeg")
-os.makedirs(ffmpeg_path, exist_ok=True)
-bin_path = os.path.join(ffmpeg_path, "bin")
+# --- Check ffmpeg installation (Linux) ---
+def check_ffmpeg():
+    try:
+        subprocess.run(["ffmpeg", "-version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
 
-ffmpeg_exe = os.path.join(bin_path, "ffmpeg.exe")
-ffprobe_exe = os.path.join(bin_path, "ffprobe.exe")
-ffplay_exe = os.path.join(bin_path, "ffplay.exe")
-
-if not (os.path.isfile(ffmpeg_exe) and os.path.isfile(ffprobe_exe) and os.path.isfile(ffplay_exe)):
-    print("ffmpeg not found. Downloading...")
-    zip_url = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip"
-    zip_file = os.path.join(ffmpeg_path, "ffmpeg.zip")
-
-    urllib.request.urlretrieve(zip_url, zip_file)
-    print("Download complete. Extracting...")
-
-    with zipfile.ZipFile(zip_file, "r") as zip_ref:
-        zip_ref.extractall(ffmpeg_path)
-
-    extracted_folder = None
-    for f in os.listdir(ffmpeg_path):
-        full_path = os.path.join(ffmpeg_path, f)
-        if os.path.isdir(full_path) and f.startswith("ffmpeg"):
-            extracted_folder = full_path
-            break
-
-    if extracted_folder is None:
-        raise Exception("Extracted ffmpeg folder not found!")
-
-    extracted_bin = os.path.join(extracted_folder, "bin")
-    os.makedirs(bin_path, exist_ok=True)
-    for file in os.listdir(extracted_bin):
-        shutil.move(os.path.join(extracted_bin, file), os.path.join(bin_path, file))
-
-    os.remove(zip_file)
-    shutil.rmtree(extracted_folder)
-    print("ffmpeg setup complete.")
+if not check_ffmpeg():
+    print("ffmpeg not found. Installing via apt...")
+    try:
+        subprocess.run(["sudo", "apt", "update"], check=True)
+        subprocess.run(["sudo", "apt", "install", "-y", "ffmpeg"], check=True)
+        if not check_ffmpeg():
+            raise Exception("ffmpeg installation failed")
+    except Exception as e:
+        print(f"Error installing ffmpeg: {e}")
+        sys.exit(1)
 
 # --- Function to update title in Save-as field for YouTube URLs ---
 def update_title(*args):
@@ -93,7 +70,7 @@ def download_file(url, filename, format_type="mp3", use_cookies_if_needed=True):
 
     # Basic command without cookies
     if format_type == "mp3":
-        cmd = ["yt-dlp", "-x", "--audio-format", "mp3", "--ffmpeg-location", bin_path, "-o", out_path, "--newline", url]
+        cmd = ["yt-dlp", "-x", "--audio-format", "mp3", "-o", out_path, "--newline", url]
     else:  # mp4
         cmd = ["yt-dlp", "-f", "best", "-o", out_path, "--newline", url]
 
@@ -141,7 +118,6 @@ def download_file(url, filename, format_type="mp3", use_cookies_if_needed=True):
 
     return success, out_path
 
-
 # --- Wrapper functions ---
 def download_mp3():
     url = entry_url.get().strip()
@@ -171,7 +147,7 @@ def download_mp4():
 
 # --- GUI ---
 root = tk.Tk()
-root.title("Universal Audio/Video Downloader")
+root.title("Universal Audio/Video Downloader (Linux)")
 
 tk.Label(root, text="Video/Audio URL:").grid(row=0, column=0, padx=10, pady=10)
 entry_url = tk.Entry(root, width=50)
