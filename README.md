@@ -12,6 +12,7 @@ Designed for private, legal use only.
 - Uses browser cookies (Firefox, Edge, Chrome, Opera, Brave) if login is required
 - Saves files into a local `music` directory
 - Tested with **Python 3.13.7**
+Using the `.exe` file does not require a Python installation
 
 ---
 
@@ -22,7 +23,19 @@ Only download content you own or that is licensed for free use.
 
 ---
 
-## Installation & Usage
+## Download
+👉 [Get the latest release here](https://github.com/st155213/media-url-downloader-Python/releases)
+
+Download the `.exe` file from the releases page and run it directly.  
+No Python installation required.  
+##  Run the Downloader
+1. Enter a video/audio URL in the GUI
+2. Choose a Save name.
+3. Click __Download MP3__ or __Download MP4__.
+4. Files will be saved in the local music directory (auto-created if missing).
+
+---
+## Installation & Usage (Python file __Optional__)
 
 ### Step 1: Install Python
 - Download Python from [python.org](https://www.python.org/)  
@@ -50,10 +63,10 @@ __If not__:
 ### Step 3: Run the Downloader
 1. Download the __media-url-downloader.pyw__ file.
 2. Run the file and wait; it will automatically download ffmpeg and yt-dlp if missing.
-4. Enter a video/audio URL in the GUI
-5. Choose a Save name.
-6. Click __Download MP3__ or __Download MP4__.
-7. Files will be saved in the local music directory (auto-created if missing).
+3. Enter a video/audio URL in the GUI
+4. Choose a Save name.
+5. Click __Download MP3__ or __Download MP4__.
+6. Files will be saved in the local music directory (auto-created if missing).
 
 ## License
 
