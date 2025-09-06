@@ -83,10 +83,15 @@ def clean_filename(name, ext):
     return name
 
 # --- Generic download function with GUI progress ---
-def download_file(url, filename, format_type="mp3"):
+def download_file(url, filename, format_type="mp3", use_cookies_if_needed=True):
+    """
+    Downloads a file from YouTube (or other supported sites) as MP3 or MP4.
+    Optionally uses browser cookies if YouTube requests human verification.
+    """
     out_path = os.path.join(path_music_dir, filename)
     success = False
 
+    # Basic command without cookies
     if format_type == "mp3":
         cmd = ["yt-dlp", "-x", "--audio-format", "mp3", "--ffmpeg-location", bin_path, "-o", out_path, "--newline", url]
     else:  # mp4
@@ -107,10 +112,35 @@ def download_file(url, filename, format_type="mp3"):
         if process.returncode == 0:
             success = True
             progress_label.config(text="Progress: 100% - Complete!")
+        else:
+            # If failed and cookies option enabled, try browsers
+            if use_cookies_if_needed:
+                browsers = ["firefox", "chrome", "edge", "opera", "brave"]
+                for browser in browsers:
+                    try:
+                        cmd_cookies = cmd + ["--cookies-from-browser", browser]
+                        process = subprocess.Popen(cmd_cookies, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+                        for line in process.stdout:
+                            line = line.strip()
+                            if "%" in line:
+                                try:
+                                    perc = line.split("%")[0].split()[-1]
+                                    progress_label.config(text=f"Progress ({browser} cookies): {perc}%")
+                                    root.update_idletasks()
+                                except:
+                                    pass
+                        process.wait()
+                        if process.returncode == 0:
+                            success = True
+                            progress_label.config(text=f"Progress ({browser} cookies): 100% - Complete!")
+                            break
+                    except:
+                        continue
     except subprocess.CalledProcessError:
         pass
 
     return success, out_path
+
 
 # --- Wrapper functions ---
 def download_mp3():
