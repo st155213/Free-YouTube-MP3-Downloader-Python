@@ -6,6 +6,7 @@ import zipfile
 import shutil
 import tkinter as tk
 from tkinter import messagebox
+import threading 
 
 # --- Music directory ---
 path_music_dir = os.path.join(os.getcwd(), "music")
@@ -58,10 +59,11 @@ if not (os.path.isfile(ffmpeg_exe) and os.path.isfile(ffprobe_exe) and os.path.i
     shutil.rmtree(extracted_folder)
     print("ffmpeg setup complete.")
 
-# --- Function to update title in Save-as field for YouTube URLs ---
+# --- Function to update the title in the Save-as field for YouTube URLs ---
 def update_title(*args):
     url = entry_url.get().strip()
     if "youtube.com" in url or "youtu.be" in url:
+        url = url.split("&list=")[0]  # Only take the first video if playlist
         try:
             ydl_opts = {"quiet": True, "no_warnings": True}
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -71,7 +73,7 @@ def update_title(*args):
                     entry_name.delete(0, tk.END)
                     entry_name.insert(0, title)
         except Exception:
-            pass  # fail silently
+            pass  # Fail silently
 
 # --- Function to clean filenames ---
 def clean_filename(name, ext):
@@ -82,19 +84,14 @@ def clean_filename(name, ext):
         name += ext
     return name
 
-# --- Generic download function with GUI progress ---
-def download_file(url, filename, format_type="mp3", use_cookies_if_needed=True):
-    """
-    Downloads a file from YouTube (or other supported sites) as MP3 or MP4.
-    Optionally uses browser cookies if YouTube requests human verification.
-    """
+# --- Threaded download function ---
+def download_file_thread(url, filename, format_type="mp3"):
     out_path = os.path.join(path_music_dir, filename)
-    success = False
+    url = url.split("&list=")[0]  # Remove playlist part to download single video
 
-    # Basic command without cookies
     if format_type == "mp3":
         cmd = ["yt-dlp", "-x", "--audio-format", "mp3", "--ffmpeg-location", bin_path, "-o", out_path, "--newline", url]
-    else:  # mp4
+    else:
         cmd = ["yt-dlp", "-f", "best", "-o", out_path, "--newline", url]
 
     try:
@@ -104,43 +101,20 @@ def download_file(url, filename, format_type="mp3", use_cookies_if_needed=True):
             if "%" in line:
                 try:
                     perc = line.split("%")[0].split()[-1]
-                    progress_label.config(text=f"Progress: {perc}%")
-                    root.update_idletasks()
+                    root.after(0, lambda p=perc: progress_label.config(text=f"Progress: {p}%"))
                 except:
                     pass
         process.wait()
+        # Show success message when process completes
         if process.returncode == 0:
-            success = True
-            progress_label.config(text="Progress: 100% - Complete!")
+            root.after(0, lambda: progress_label.config(text="Progress: 100% - Complete!"))
+            root.after(0, lambda: messagebox.showinfo("Success", f"Download complete!\nSaved as {out_path}"))
         else:
-            # If failed and cookies option enabled, try browsers
-            if use_cookies_if_needed:
-                browsers = ["firefox", "chrome", "edge", "opera", "brave"]
-                for browser in browsers:
-                    try:
-                        cmd_cookies = cmd + ["--cookies-from-browser", browser]
-                        process = subprocess.Popen(cmd_cookies, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-                        for line in process.stdout:
-                            line = line.strip()
-                            if "%" in line:
-                                try:
-                                    perc = line.split("%")[0].split()[-1]
-                                    progress_label.config(text=f"Progress ({browser} cookies): {perc}%")
-                                    root.update_idletasks()
-                                except:
-                                    pass
-                        process.wait()
-                        if process.returncode == 0:
-                            success = True
-                            progress_label.config(text=f"Progress ({browser} cookies): 100% - Complete!")
-                            break
-                    except:
-                        continue
-    except subprocess.CalledProcessError:
-        pass
-
-    return success, out_path
-
+            root.after(0, lambda: progress_label.config(text="Download failed"))
+            root.after(0, lambda: messagebox.showerror("Download failed", "Check URL or login if needed."))
+    except Exception as e:
+        print("Download error:", e)
+        root.after(0, lambda: progress_label.config(text="Download failed"))
 
 # --- Wrapper functions ---
 def download_mp3():
@@ -150,11 +124,8 @@ def download_mp3():
         messagebox.showwarning("Input error", "Please enter URL and filename.")
         return
     filename = clean_filename(title, ".mp3")
-    success, out_path = download_file(url, filename, "mp3")
-    if success:
-        messagebox.showinfo("Success", f"Download complete!\nSaved as {out_path}")
-    else:
-        messagebox.showerror("Download failed", "Download failed. Check URL or login if needed.")
+    # Start the download in a separate thread to keep GUI responsive
+    threading.Thread(target=download_file_thread, args=(url, filename, "mp3"), daemon=True).start()
 
 def download_mp4():
     url = entry_url.get().strip()
@@ -163,11 +134,7 @@ def download_mp4():
         messagebox.showwarning("Input error", "Please enter URL and filename.")
         return
     filename = clean_filename(title, ".mp4")
-    success, out_path = download_file(url, filename, "mp4")
-    if success:
-        messagebox.showinfo("Success", f"Download complete!\nSaved as {out_path}")
-    else:
-        messagebox.showerror("Download failed", "Download failed. Check URL or login if needed.")
+    threading.Thread(target=download_file_thread, args=(url, filename, "mp4"), daemon=True).start()
 
 # --- GUI ---
 root = tk.Tk()
