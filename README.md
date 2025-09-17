@@ -30,7 +30,7 @@ Download the `.exe` file from the releases page and run it directly.
 No Python installation required.  
 ##  Run the Downloader
 1. Enter a video/audio URL in the GUI
-2. Choose a Save name.
+2. Choose a Save name (for some sites the program will auto-detect the title).
 3. Click __Download MP3__ or __Download MP4__.
 4. Files will be saved in the local music directory (auto-created if missing).
 
