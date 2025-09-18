@@ -61,7 +61,7 @@ __If not__:
   
   Test again by excecute: pip --version
 ### Step 3: Run the Downloader
-1. Download the __media-url-downloader.pyw__ file.
+1. Download the __PyMediaDownloader.pyw__ file.
 2. Run the file and wait; it will automatically download ffmpeg and yt-dlp if missing.
 3. Enter a video/audio URL in the GUI.
 4. Choose a Save name.
@@ -69,7 +69,7 @@ __If not__:
 6. Files will be saved in the local music directory (auto-created if missing).
 ## Installation & Usage on Linux
 1. Install Python & Pip.
-2. Download the __media-url-downloader_linux.py__ file.
+2. Download the __PyMediaDownloader_linux.py__ file.
 3. Get a __cookies.txt__ file from (Firefox Extension) and save it in the same dir as the py file.
 3. Run the Python file (Enter Url and Savename in GUI)
 4. Click __Download MP3__ or __Download MP4__. 
