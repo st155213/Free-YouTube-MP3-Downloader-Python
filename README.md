@@ -1,6 +1,6 @@
 # MP3 & MP4 Downloader (Python)
 
-A simple and lightweight Python GUI tool to download online videos as **MP3** or **MP4** files on Windows and linux (mint).  
+A simple and lightweight Python GUI tool to download online videos as **MP3** or **MP4** files on Windows and Linux (Mint).  
 It automatically handles dependencies like **ffmpeg** and uses **yt-dlp** for extraction.  
 Designed for private, legal use only. 
 
